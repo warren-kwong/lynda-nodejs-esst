@@ -1,13 +1,17 @@
-// events module
-const events = require('events');
+const EventEmitter = require('events').EventEmitter;
+const util = require('util');
 
-// event emitter is a constructor so we'll need to create a new instance
-const emitter = new events.EventEmitter();
+let Person = function(name) {
+  this.name = name;
+};
 
-// everytime we use 'on' we can wire a custom event
-emitter.on('customEvent', (msg, status) => {
-  console.log(`${status}: ${msg}`);
+// add EventEmitter to Person prototype
+util.inherits(Person, EventEmitter);
+
+let ben = new Person('Benjamin Franklin');
+
+ben.on('speak', function(phrase) {
+  console.log(`${this.name}: ${phrase}`);
 });
 
-// trigger custom event
-emitter.emit('customEvent', 'Hello World', 200);
+ben.emit('speak', 'You may delay, but time will not.');
