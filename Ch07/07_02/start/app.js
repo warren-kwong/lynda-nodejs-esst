@@ -1,9 +1,11 @@
-var http = require("http")
+/* jshint esnext: true */
 
-http.createServer(function(req, res) {
+var http = require('http');
 
-   res.writeHead(200, {"Content-Type": "text/html"});
-   res.end(`<!DOCTYPE html>
+http
+  .createServer(function(req, res) {
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.end(`<!DOCTYPE html>
      <html>
        <head>
          <title>Web Server</title>
@@ -12,7 +14,7 @@ http.createServer(function(req, res) {
          <h1>Hello World</h1>
      </html> 
    `);
+  })
+  .listen(3000);
 
-}).listen(3000)
-
-console.log("Web Server running at http://localhost:3000");
+console.log('Server running http://localhost:3000');
